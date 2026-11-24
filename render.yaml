@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: civp-api
+    env: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: CIVP_ALLOWED_ORIGINS
+        value: https://civp-frontend.onrender.com
+  - type: web
+    name: civp-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://civp-api.onrender.com
