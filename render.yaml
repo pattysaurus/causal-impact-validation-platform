@@ -1,7 +1,7 @@
 services:
   - type: web
     name: civp-api
-    env: docker
+    runtime: docker
     plan: free
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
